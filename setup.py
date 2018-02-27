@@ -14,7 +14,7 @@ from setuptools import setup
 
 
 PACKAGE_NAME = 'excelsior'
-PACKAGE_VERSION = '0.0.5'
+PACKAGE_VERSION = '0.0.6'
 PACKAGES = ['excelsior']
 
 def striplines(lines):

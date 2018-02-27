@@ -26,7 +26,7 @@ if sys.version_info >= (3, 0, 0):
     unicode = str
 
 
-def cell_value(cell):
+def cell_value(cell, datemode=None):
     ctype, value = repr(cell).split(':', 1)
     if 'empty' == ctype:
         return u''
@@ -38,7 +38,10 @@ def cell_value(cell):
         else:
             return float(value)
     elif 'xldate' == ctype:
-        return
+        if None == datemode:
+            return
+        else:
+            return xlrd.xldate_as_datetime(int(float(value)), datemode)
     elif 'bool' == ctype:
         return bool(value)
     elif 'error' == ctype:
@@ -58,7 +61,7 @@ def read_data(xls):
         for row_nr in range(sheet.nrows):
             row = []
             for col_nr in range(sheet.ncols):
-                row.append(cell_value(sheet.cell(row_nr, col_nr)))
+                row.append(cell_value(sheet.cell(row_nr, col_nr), xls.datemode))
             table['data'].append(row)
         data['sheets'].append(table)
     return data
