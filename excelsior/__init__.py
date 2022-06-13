@@ -84,7 +84,7 @@ def colour_error(message):
 
 
 def write_file(data, outfile):
-    with open(outfile, 'wb') as f:
+    with open(outfile, 'w') as f:
         f.write(data)
         sys.stderr.write('{}: written'.format(outfile))
 
@@ -94,14 +94,14 @@ def write_csv(sheet, outfile, fmt='tsv'):
         writer = csv.writer(outfile, dialect=dialect)
         writer.writerows(sheet['data'])
     else:
-        with open(outfile, 'wb') as f:
+        with open(outfile, 'w') as f:
             writer = csv.writer(f, dialect=dialect)
             writer.writerows(sheet['data'])
             sys.stderr.write('{}: written'.format(outfile))
 
 def convert(excel_file, fmt='tsv', output='print'):
     try:
-        with open(excel_file, 'rb') as f:
+        with open(excel_file, 'r') as f:
             xls = xlrd.open_workbook(
                 file_contents=mmap(f.fileno(), 0, access=ACCESS_READ)
                 )

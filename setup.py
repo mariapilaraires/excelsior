@@ -20,10 +20,10 @@ PACKAGES = ['excelsior']
 def striplines(lines):
     return [line.strip() for line in lines]
 
-with open('requirements.pip', 'rb') as reqs:
+with open('requirements.pip', 'r') as reqs:
     install_requires = list(filter(None, striplines(reqs.readlines())))
 
-with open('README.rst', 'rb') as readme:
+with open('README.rst', 'r') as readme:
     long_description = "\n" + readme.read()
 
 
